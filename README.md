@@ -15,6 +15,8 @@ A clean, scalable, and maintainable framework using best practices, such as foll
 │   └── test_login.py        # Example test file
 │
 ├── utils/                   # Utility classes/functions
+│   └── driver_factory.py    # WebDriver Factory
+│   └── logger.py            # Logger for logging automation events
 │   └── config_reader.py     # Read the config file
 │
 ├── .gitignore               # Git ignore file

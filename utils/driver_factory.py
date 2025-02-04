@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from utils.config_reader import read_config
+from utils.logger import setup_logger
 
 import yaml
 
@@ -11,15 +12,7 @@ class DriverFactory:
     def __init__(self):
         self.driver = None
         self.browser = read_config().get("browser")
-        self.setup_logger()
-
-    def setup_logger(self):
-        """Configure a basic logger"""
-        self.logger = logging.getLogger("Web UI Automation")
-        handler = logging.StreamHandler()
-        handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
-        self.logger.addHandler(handler)
-        self.logger.setLevel(logging.INFO)
+        self.logger = setup_logger()
 
     def create_driver(self):
         """Factory method to create a WebDriver instance"""
