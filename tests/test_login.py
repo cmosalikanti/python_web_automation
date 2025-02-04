@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pytest
 from drivers.driver_setup import get_driver
 from pages.login_page import LoginPage
-from utils.webdriver_manager import read_config
+from utils.config_reader import read_config
 
 @pytest.fixture(scope="module")
 def driver():
