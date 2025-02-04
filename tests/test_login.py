@@ -3,19 +3,21 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
-from drivers.driver_setup import get_driver
 from pages.login_page import LoginPage
 from utils.config_reader import read_config
 
-@pytest.fixture(scope="module")
+from utils.driver_factory import DriverFactory
+
+@pytest.fixture(scope="function")
 def driver():
-    config = read_config()
-    driver = get_driver(config["browser"])
-    driver.get(config["url"])
+    """Fixture to set up and tear down the driver"""
+    driver_factory = DriverFactory()
+    driver = driver_factory.create_driver()
     yield driver
-    driver.quit()
+    driver_factory.quit_driver()
 
 def test_login(driver):
+    driver.get(read_config().get("selenium").get("base_url"))
     login_page = LoginPage(driver)
     login_page.enter_username("standard_user")
     login_page.enter_password("secret_sauce")
